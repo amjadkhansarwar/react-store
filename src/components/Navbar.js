@@ -9,7 +9,24 @@ function NavbarComponent(){
     const [show, setShow] = useState(false);
     const handleClose = ()=> setShow(false)
     const handelShow = ()=> setShow(true)
+
+    const checkout = async ()=>{
+        await fetch('http://localhost:4000/checkout', {
+            method:'Post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({items: cart.items})
+        }).then((response)=>{
+            return response.json()
+        }).then((resonse) =>{
+            if(resonse.url){
+                window.location.assign(resonse.url)
+            }
+        })
+    }
     const productsCount = cart.items.reduce((sum, product)=> sum +product.quantity, 0)
+
     return(
         <>
             <Navbar expand= "sm">
@@ -31,7 +48,7 @@ function NavbarComponent(){
                         <CartProduct key={idx} id={currentProduct.id} quantity={currentProduct.quantity}></CartProduct>             
                     ))}
                     <h1> Total: ${cart.getTotalCost().toFixed(2)}</h1>
-                    <Button variant='success' >Purchase items!</Button>
+                    <Button variant='success' onClick={checkout} > Purchase items!</Button>
                     </>
                     :
                     <h1>There is no items in your cart</h1>
