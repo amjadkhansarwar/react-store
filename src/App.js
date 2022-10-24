@@ -6,7 +6,7 @@ import {Container} from 'react-bootstrap'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Cancel from './pages/Cancel';
 import Store from './pages/Store';
-import Sucess from './pages/Sucess';
+import Success from './pages/Success';
 import CartProvider from './CartContext';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route index element={<Store />}></Route>
-        <Route path='sucess'element={<Sucess />}></Route>
+        <Route path='sucess'element={<Success />}></Route>
         <Route path='cancel'element={<Cancel />}></Route>
       </Routes>
       </BrowserRouter>
